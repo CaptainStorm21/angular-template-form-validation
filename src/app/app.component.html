@@ -1,0 +1,19 @@
+<!--
+  ngModel keeps track of whatever's inside there
+  anytime it changes we want to update the property of email on component class
+-->
+<form>
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control">
+      <input
+       class="input"
+       type="text"
+       placeholder="Enter your email"
+       name="Email"
+       [(ngModel)]="email"
+      >
+    </div>
+    {{ email }}
+  </div>
+</form>
