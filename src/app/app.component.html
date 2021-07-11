@@ -2,18 +2,32 @@
   ngModel keeps track of whatever's inside there
   anytime it changes we want to update the property of email on component class
 -->
-<form>
+<form #emailForm="ngForm">
   <div class="field">
     <label class="label">Email</label>
     <div class="control">
-      <input
-       class="input"
-       type="text"
-       placeholder="Enter your email"
-       name="Email"
-       [(ngModel)]="email"
-      >
+      <input required
+             class="input"
+             name="email"
+             [(ngModel)]="email"
+             type = "email"
+             pattern = ".+@.+\..+"
+             >
+
     </div>
-    {{ email }}
   </div>
 </form>
+<hr />
+<div>
+  <p>
+    Is Email form valid: {{ emailForm.valid}}
+  </p>
+  <p>
+    Form Values: {{ emailForm.value | json}}
+  </p>
+</div>
+<div>
+  <p>
+    Email Validation errors: {{ emailForm.controls.email.errors | json }}
+  </p>
+</div>
