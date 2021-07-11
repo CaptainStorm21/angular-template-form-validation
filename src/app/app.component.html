@@ -2,7 +2,11 @@
   ngModel keeps track of whatever's inside there
   anytime it changes we want to update the property of email on component class
 -->
-<form #emailForm="ngForm">
+<form
+  (ngSubmit)="onSubmit()"
+  #emailForm="ngForm">
+
+  <!--form fields-->
   <div class="field">
     <label class="label">Email</label>
     <div class="control">
@@ -12,11 +16,30 @@
              [(ngModel)]="email"
              type = "email"
              pattern = ".+@.+\..+"
+             #emailControl = "ngModel"
              >
-
     </div>
   </div>
+    <!-- <ng-container *ngIf = "emailForm.controls.email.invalid">
+      <p> You must enter email! </p>
+    </ng-container> -->
+
+    <ng-container *ngIf = "emailControl.invalid && emailControl.touched">
+     <div *ngIf = "emailControl.errors.required">
+      <p> Your email must be entered correctly</p>
+    </div>
+
+    <div *ngIf = "emailControl.errors.pattern">
+      <p>Your pattern does not match</p>
+    </div>
+    </ng-container>
+
+    <button [disabled] ="emailForm.invalid"> Submit </button>
 </form>
+
+
+
+
 <hr />
 <div>
   <p>
@@ -27,7 +50,7 @@
   </p>
 </div>
 <div>
-  <p>
+  <!-- <p>
     Email Validation errors: {{ emailForm.controls.email.errors | json }}
-  </p>
+  </p> -->
 </div>
